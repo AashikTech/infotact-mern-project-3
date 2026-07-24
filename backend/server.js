@@ -51,6 +51,7 @@ app.use('/api/departments', require('./routes/department'));
 app.use('/api/leaves', require('./routes/leave'));
 app.use('/api/payroll', require('./routes/payroll'));
 app.use('/api/payroll', require('./routes/payslip'));
+app.use('/api/payroll/batch', require('./routes/batchPayroll'));
 
 // Error handling middleware
 app.use(errorHandler);
