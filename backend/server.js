@@ -46,10 +46,10 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/api/auth', require('./routes/auth'));
-// app.use('/api/employees', require('./routes/employees'));
-// app.use('/api/departments', require('./routes/departments'));
-// app.use('/api/leaves', require('./routes/leaves'));
-// app.use('/api/payroll', require('./routes/payroll'));
+app.use('/api/employees', require('./routes/employee'));
+app.use('/api/departments', require('./routes/department'));
+app.use('/api/leaves', require('./routes/leave'));
+app.use('/api/payroll', require('./routes/payroll'));
 
 // Error handling middleware
 app.use(errorHandler);
