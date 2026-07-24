@@ -50,6 +50,7 @@ app.use('/api/employees', require('./routes/employee'));
 app.use('/api/departments', require('./routes/department'));
 app.use('/api/leaves', require('./routes/leave'));
 app.use('/api/payroll', require('./routes/payroll'));
+app.use('/api/payroll', require('./routes/payslip'));
 
 // Error handling middleware
 app.use(errorHandler);
