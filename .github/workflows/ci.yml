@@ -21,7 +21,7 @@ jobs:
         
     - name: Install backend dependencies
       working-directory: ./backend
-      run: npm install
+      run: npm ci
       
     - name: Run backend build
       working-directory: ./backend
@@ -41,7 +41,7 @@ jobs:
         
     - name: Install frontend dependencies
       working-directory: ./frontend
-      run: npm install
+      run: npm ci
       
     - name: Run frontend build
       working-directory: ./frontend
