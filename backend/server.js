@@ -5,10 +5,10 @@ const connectDB = require('./config/db');
 const {
   helmetConfig,
   generalLimiter,
-  corsConfig,
   mongoSanitizeConfig,
   securityHeaders
 } = require('./middleware/security');
+const { corsMiddleware } = require('./middleware/cors');
 const { errorHandler, notFound } = require('./middleware/error');
 
 // Load environment variables
@@ -28,7 +28,7 @@ app.use(securityHeaders);
 app.use('/api', generalLimiter);
 
 // CORS configuration
-app.use(corsConfig);
+app.use(corsMiddleware);
 
 // Body parser middleware
 app.use(express.json({ limit: '10mb' }));
