@@ -47,8 +47,8 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Server is running' });
 });
 
-// API routes will be added here
-// app.use('/api/auth', require('./routes/auth'));
+// API routes
+app.use('/api/auth', require('./routes/auth'));
 // app.use('/api/employees', require('./routes/employees'));
 // app.use('/api/departments', require('./routes/departments'));
 // app.use('/api/leaves', require('./routes/leaves'));
