@@ -9,6 +9,7 @@ const {
   mongoSanitizeConfig,
   securityHeaders
 } = require('./middleware/security');
+const { errorHandler, notFound } = require('./middleware/error');
 
 // Load environment variables
 dotenv.config();
@@ -51,22 +52,10 @@ app.use('/api/auth', require('./routes/auth'));
 // app.use('/api/payroll', require('./routes/payroll'));
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  
-  res.status(err.statusCode || 500).json({
-    success: false,
-    error: err.message || 'Server Error'
-  });
-});
+app.use(errorHandler);
 
 // 404 handler
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    error: 'Route not found'
-  });
-});
+app.use(notFound);
 
 const PORT = process.env.PORT || 5000;
 
