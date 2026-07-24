@@ -1,11 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors');
-const helmet = require('helmet');
 const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
-const mongoSanitize = require('express-mongo-sanitize');
 const connectDB = require('./config/db');
+const {
+  helmetConfig,
+  generalLimiter,
+  corsConfig,
+  mongoSanitizeConfig,
+  securityHeaders
+} = require('./middleware/security');
 
 // Load environment variables
 dotenv.config();
@@ -16,22 +19,15 @@ connectDB();
 const app = express();
 
 // Security middleware
-app.use(helmet());
-app.use(mongoSanitize());
+app.use(helmetConfig);
+app.use(mongoSanitizeConfig);
+app.use(securityHeaders);
 
 // Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  message: 'Too many requests from this IP, please try again after 15 minutes'
-});
-app.use('/api', limiter);
+app.use('/api', generalLimiter);
 
 // CORS configuration
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true
-}));
+app.use(corsConfig);
 
 // Body parser middleware
 app.use(express.json({ limit: '10mb' }));
